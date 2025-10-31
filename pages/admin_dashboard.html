@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - JRMSU TC Boarding House System</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fjrmsutcb4972back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"></script>
+<script type="module" src="https://static.rocket.new/rocket-shot.js?v=0.0.1"></script>
+</head>
+<body class="min-h-screen bg-background">
+    <!-- Navigation Header -->
+    <nav class="bg-white shadow-sm border-b border-secondary-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-lg font-bold text-text-primary">JRMSU TC Admin</h1>
+                        <p class="text-xs text-text-secondary">Boarding House Management</p>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="room_availability.html" class="text-text-secondary hover:text-primary transition-colors duration-200">
+                        Room Management
+                    </a>
+                    <a href="student_registration.html" class="text-text-secondary hover:text-primary transition-colors duration-200">
+                        Student Registration
+                    </a>
+                    <div class="relative">
+                        <button id="profileDropdown" class="flex items-center space-x-2 text-text-secondary hover:text-primary transition-colors duration-200">
+                            <div class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">
+                                <svg class="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                </svg>
+                            </div>
+                            <span class="text-sm font-medium">Admin</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </button>
+                        <div id="profileMenu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-secondary-200 z-50">
+                            <a href="student_login.html" class="block px-4 py-2 text-sm text-text-secondary hover:bg-secondary-50 hover:text-text-primary">
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" class="md:hidden p-2 rounded-md text-text-secondary hover:text-primary hover:bg-secondary-100 transition-colors duration-200">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-secondary-200">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="room_availability.html" class="block px-3 py-2 text-text-secondary hover:text-primary hover:bg-secondary-50 rounded-md">
+                    Room Management
+                </a>
+                <a href="student_registration.html" class="block px-3 py-2 text-text-secondary hover:text-primary hover:bg-secondary-50 rounded-md">
+                    Student Registration
+                </a>
+                <a href="student_login.html" class="block px-3 py-2 text-text-secondary hover:text-primary hover:bg-secondary-50 rounded-md">
+                    Logout
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Dashboard Header -->
+        <div class="mb-8">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold text-text-primary">Dashboard Overview</h1>
+                    <p class="mt-2 text-text-secondary">Welcome back, Administrator. Here's what's happening today.</p>
+                </div>
+                <div class="mt-4 sm:mt-0 flex items-center space-x-3">
+                    <div class="text-sm text-text-secondary">
+                        Last updated: <span class="font-medium">Oct 12, 2025 5:47 AM</span>
+                    </div>
+                    <button class="btn-primary">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+                        </svg>
+                        Export Report
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Performance Metrics -->
+        <section class="mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Current Occupancy -->
+                <div class="card-elevated p-6">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-text-secondary">Current Occupancy</p>
+                            <p class="text-2xl font-bold text-text-primary">87%</p>
+                            <p class="text-xs text-success">+5% from last month</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pending Applications -->
+                <div class="card-elevated p-6">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <div class="w-12 h-12 bg-warning-100 rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-warning" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-text-secondary">Pending Applications</p>
+                            <p class="text-2xl font-bold text-text-primary">12</p>
+                            <p class="text-xs text-warning">Requires attention</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Overdue Payments -->
+                <div class="card-elevated p-6">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <div class="w-12 h-12 bg-error-100 rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-error" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-text-secondary">Overdue Payments</p>
+                            <p class="text-2xl font-bold text-text-primary">₱45,200</p>
+                            <p class="text-xs text-error">8 students affected</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Maintenance Requests -->
+                <div class="card-elevated p-6">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <div class="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-text-secondary">Maintenance Requests</p>
+                            <p class="text-2xl font-bold text-text-primary">7</p>
+                            <p class="text-xs text-accent">3 urgent, 4 routine</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Dashboard Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Room Occupancy Grid -->
+            <div class="lg:col-span-2">
+                <div class="card-elevated">
+                    <div class="p-6 border-b border-secondary-200">
+                        <div class="flex items-center justify-between">
+                            <h2 class="text-lg font-semibold text-text-primary">Room Occupancy Status</h2>
+                            <div class="flex items-center space-x-4 text-xs">
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-success rounded-full mr-2"></div>
+                                    <span class="text-text-secondary">Occupied</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-secondary-300 rounded-full mr-2"></div>
+                                    <span class="text-text-secondary">Vacant</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-warning rounded-full mr-2"></div>
+                                    <span class="text-text-secondary">Maintenance</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-primary rounded-full mr-2"></div>
+                                    <span class="text-text-secondary">Reserved</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <!-- Building A -->
+                        <div class="mb-6">
+                            <h3 class="text-sm font-medium text-text-primary mb-3">Building A - Main Dormitory</h3>
+                            <div class="grid grid-cols-8 gap-2">
+                                <div class="aspect-square bg-success rounded-md flex items-center justify-center text-xs font-medium text-white cursor-pointer hover:opacity-80 transition-opacity" title="Room A101 - Maria Santos">A101</div>
+                                <div class="aspect-square bg-success rounded-md flex items-center justify-center text-xs font-medium text-white cursor-pointer hover:opacity-80 transition-opacity" title="Room A102 - Juan Dela Cruz">A102</div>
+                                <div class="aspect-square bg-secondary-300 rounded-md flex items-center justify-center text-xs font-medium text-white cursor-pointer hover:opacity-80 transition-opacity" title="Room A103 - Vacant">A103</div>
+                                <div class="aspect-square bg-success rounded-md flex items-center justify-center text-xs font-medium text-white cursor-pointer hover:opacity-80 transition-opacity" title="Room A104 - Ana Rodriguez">A104</div>
+                                <div class="aspect-square bg-warning rounded-md flex items-center justify-center text-xs font-medium text-white cursor-pointer hover:opacity-80 transition-opacity" title="Room A105 - Under Maintenance">A105</div>
+                                <div class="aspect-square bg-success rounded-md flex items-center justify-center text-xs font-medium text-white cursor-pointer hover:opacity-80 transition-opacity" title="Room A106 - Carlos Mendoza">A106</div>
+                                <div class="aspect-square bg-primary rounded-md flex items-center justify-center text-xs font-medium text-white cursor-pointer hover:opacity-80 transition-opacity" title="Room A107 - Reserved">A107</div>
+                                <div class="aspect-square bg-success rounded-md flex items-center justify-center text-xs font-medium text-white cursor-pointer hover:opacity-80 transition-opacity" title="Room A108 - Lisa Garcia">A108</div>
+                                <div class="aspect-square bg-success rounded-md flex items-center justify-center text-xs font-medium text-white cursor-pointer hover:opacity-80 transition-opacity" title="Room A109 - Miguel Torres">A109</div>
+                                <div class="aspect-square bg-secondary-300 rounded-md flex items-center justify-center text-xs font-medium text-white cursor-pointer hover:opacity-80 transition-opacity" title="Room A110 - Vacant">A110</div>
+                                <div class="aspect-square bg-success rounded-md flex items-center justify-center text-xs font-medium text-white cursor-pointer hover:opacity-80 transition-opacity" title="Room A111 - Sofia Reyes">A111</div>
+                                <div class="aspect-square bg-success rounded-md flex items-center justify-center text-xs font-medium text-white cursor-pointer hover:opacity-80 transition-opacity" title="Room A112 - David Lopez">A112</div>
+                                <div class="aspect-square bg-success rounded-md flex items-center justify-center text-xs font-medium text-white cursor-pointer hover:opacity-80 transition-opacity" title="Room A113 - Elena Morales">A113</div>
+                                <div class="aspect-square bg-secondary-300 rounded-md flex items-center justify-center text-xs font-medium text-white cursor-pointer hover:opacity-80 transition-opacity" title="Room A114 - Vacant">A114</div>
+                                <div class="aspect-square bg-success rounded-md flex items-center justify-center text-xs font-medium text-white cursor-pointer hover:opacity-80 transition-opacity" title="Room A115 - Roberto Cruz">A115</div>
+                                <div class="aspect-square bg-success rounded-md flex items-center justify-center text-xs font-medium text-white cursor-pointer hover:opacity-80 transition-opacity" title="Room A116 - Carmen Flores">A116</div>
+                            </div>
+                        </div>
+
+                        <!-- Building B -->
+                        <div>
+                            <h3 class="text-sm font-medium text-text-primary mb-3">Building B - Annex Dormitory</h3>
+                            <div class="grid grid-cols-8 gap-2">
+                                <div class="aspect-square bg-success rounded-md flex items-center justify-center text-xs font-medium text-white cursor-pointer hover:opacity-80 transition-opacity" title="Room B201 - Patricia Ramos">B201</div>
+                                <div class="aspect-square bg-success rounded-md flex items-center justify-center text-xs font-medium text-white cursor-pointer hover:opacity-80 transition-opacity" title="Room B202 - Antonio Silva">B202</div>
+                                <div class="aspect-square bg-success rounded-md flex items-center justify-center text-xs font-medium text-white cursor-pointer hover:opacity-80 transition-opacity" title="Room B203 - Isabella Cruz">B203</div>
+                                <div class="aspect-square bg-secondary-300 rounded-md flex items-center justify-center text-xs font-medium text-white cursor-pointer hover:opacity-80 transition-opacity" title="Room B204 - Vacant">B204</div>
+                                <div class="aspect-square bg-success rounded-md flex items-center justify-center text-xs font-medium text-white cursor-pointer hover:opacity-80 transition-opacity" title="Room B205 - Fernando Diaz">B205</div>
+                                <div class="aspect-square bg-success rounded-md flex items-center justify-center text-xs font-medium text-white cursor-pointer hover:opacity-80 transition-opacity" title="Room B206 - Gabriela Santos">B206</div>
+                                <div class="aspect-square bg-warning rounded-md flex items-center justify-center text-xs font-medium text-white cursor-pointer hover:opacity-80 transition-opacity" title="Room B207 - Under Maintenance">B207</div>
+                                <div class="aspect-square bg-success rounded-md flex items-center justify-center text-xs font-medium text-white cursor-pointer hover:opacity-80 transition-opacity" title="Room B208 - Ricardo Perez">B208</div>
+                                <div class="aspect-square bg-success rounded-md flex items-center justify-center text-xs font-medium text-white cursor-pointer hover:opacity-80 transition-opacity" title="Room B209 - Valeria Gomez">B209</div>
+                                <div class="aspect-square bg-success rounded-md flex items-center justify-center text-xs font-medium text-white cursor-pointer hover:opacity-80 transition-opacity" title="Room B210 - Alejandro Ruiz">B210</div>
+                                <div class="aspect-square bg-primary rounded-md flex items-center justify-center text-xs font-medium text-white cursor-pointer hover:opacity-80 transition-opacity" title="Room B211 - Reserved">B211</div>
+                                <div class="aspect-square bg-success rounded-md flex items-center justify-center text-xs font-medium text-white cursor-pointer hover:opacity-80 transition-opacity" title="Room B212 - Natalia Herrera">B212</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity & Quick Actions -->
+            <div class="space-y-6">
+                <!-- Quick Actions -->
+                <div class="card-elevated">
+                    <div class="p-6 border-b border-secondary-200">
+                        <h2 class="text-lg font-semibold text-text-primary">Quick Actions</h2>
+                    </div>
+                    <div class="p-6 space-y-3">
+                        <button class="w-full btn-primary justify-start">
+                            <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                            Review Applications
+                        </button>
+                        <button class="w-full btn-secondary justify-start">
+                            <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+                            </svg>
+                            Process Payments
+                        </button>
+                        <button class="w-full btn-secondary justify-start">
+                            <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                            Assign Maintenance
+                        </button>
+                        <button class="w-full btn-secondary justify-start">
+                            <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                            </svg>
+                            Send Notifications
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="card-elevated">
+                    <div class="p-6 border-b border-secondary-200">
+                        <h2 class="text-lg font-semibold text-text-primary">Recent Activity</h2>
+                    </div>
+                    <div class="p-6">
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-3">
+                                <div class="flex-shrink-0 w-8 h-8 bg-success-100 rounded-full flex items-center justify-center">
+                                    <svg class="w-4 h-4 text-success" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm text-text-primary">
+                                        <span class="font-medium">Maria Santos</span> payment confirmed
+                                    </p>
+                                    <p class="text-xs text-text-secondary">₱5,500 • Room A101 • 2 minutes ago</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-3">
+                                <div class="flex-shrink-0 w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">
+                                    <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                    </svg>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm text-text-primary">
+                                        New application from <span class="font-medium">Jose Rivera</span>
+                                    </p>
+                                    <p class="text-xs text-text-secondary">Computer Science • 15 minutes ago</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-3">
+                                <div class="flex-shrink-0 w-8 h-8 bg-warning-100 rounded-full flex items-center justify-center">
+                                    <svg class="w-4 h-4 text-warning" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    </svg>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm text-text-primary">
+                                        Maintenance completed for <span class="font-medium">Room A105</span>
+                                    </p>
+                                    <p class="text-xs text-text-secondary">Plumbing repair • 1 hour ago</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-3">
+                                <div class="flex-shrink-0 w-8 h-8 bg-accent-100 rounded-full flex items-center justify-center">
+                                    <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                                    </svg>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm text-text-primary">
+                                        <span class="font-medium">Carlos Mendoza</span> checked in
+                                    </p>
+                                    <p class="text-xs text-text-secondary">Room A106 • 3 hours ago</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-3">
+                                <div class="flex-shrink-0 w-8 h-8 bg-error-100 rounded-full flex items-center justify-center">
+                                    <svg class="w-4 h-4 text-error" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+                                    </svg>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm text-text-primary">
+                                        Payment overdue: <span class="font-medium">Ana Rodriguez</span>
+                                    </p>
+                                    <p class="text-xs text-text-secondary">₱5,500 • Room A104 • 5 hours ago</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Financial Summary -->
+        <section class="mt-8">
+            <div class="card-elevated">
+                <div class="p-6 border-b border-secondary-200">
+                    <h2 class="text-lg font-semibold text-text-primary">Financial Summary</h2>
+                </div>
+                <div class="p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="text-center">
+                            <p class="text-sm font-medium text-text-secondary">Monthly Revenue</p>
+                            <p class="text-3xl font-bold text-success mt-2">₱487,500</p>
+                            <p class="text-xs text-success mt-1">+12% from last month</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-sm font-medium text-text-secondary">Outstanding Balance</p>
+                            <p class="text-3xl font-bold text-warning mt-2">₱45,200</p>
+                            <p class="text-xs text-text-secondary mt-1">8 students affected</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-sm font-medium text-text-secondary">Collection Rate</p>
+                            <p class="text-3xl font-bold text-primary mt-2">91.5%</p>
+                            <p class="text-xs text-success mt-1">Above target (90%)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Student Search & Management -->
+        <section class="mt-8">
+            <div class="card-elevated">
+                <div class="p-6 border-b border-secondary-200">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                        <h2 class="text-lg font-semibold text-text-primary">Student Management</h2>
+                        <div class="mt-4 sm:mt-0 flex items-center space-x-3">
+                            <div class="relative">
+                                <input type="text" placeholder="Search students..." class="form-input pl-10 pr-4 py-2 w-64" />
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <svg class="w-4 h-4 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <button class="btn-secondary">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+                                </svg>
+                                Filter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-secondary-200">
+                        <thead class="bg-secondary-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">Student</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">Room</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">Payment Status</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">Check-in Date</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-secondary-200">
+                            <tr class="hover:bg-secondary-50">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-10 w-10">
+                                            <img class="h-10 w-10 rounded-full object-cover" src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Maria Santos" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                        </div>
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-text-primary">Maria Santos</div>
+                                            <div class="text-sm text-text-secondary">Computer Science</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-text-primary">A101</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="status-success">Paid</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">Sep 15, 2025</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <button class="text-primary hover:text-primary-700 mr-3">View</button>
+                                    <button class="text-text-secondary hover:text-text-primary">Edit</button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-secondary-50">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-10 w-10">
+                                            <img class="h-10 w-10 rounded-full object-cover" src="https://images.pixabay.com/photo/2016/11/21/12/42/beard-1845166_640.jpg" alt="Juan Dela Cruz" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                        </div>
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-text-primary">Juan Dela Cruz</div>
+                                            <div class="text-sm text-text-secondary">Business Administration</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-text-primary">A102</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="status-warning">Pending</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">Sep 10, 2025</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <button class="text-primary hover:text-primary-700 mr-3">View</button>
+                                    <button class="text-text-secondary hover:text-text-primary">Edit</button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-secondary-50">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-10 w-10">
+                                            <img class="h-10 w-10 rounded-full object-cover" src="https://images.unsplash.com/photo-1494790108755-2616b612b786?auto=format&fit=crop&w=400&q=80" alt="Ana Rodriguez" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                        </div>
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-text-primary">Ana Rodriguez</div>
+                                            <div class="text-sm text-text-secondary">Education</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-text-primary">A104</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="status-error">Overdue</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">Aug 28, 2025</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <button class="text-primary hover:text-primary-700 mr-3">View</button>
+                                    <button class="text-text-secondary hover:text-text-primary">Edit</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-secondary-200 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                <div class="text-sm text-text-secondary">
+                    © 2025 Jose Rizal Memorial State University - Tampilisan Campus. All Rights Reserved.
+                </div>
+                <div class="mt-4 md:mt-0 flex items-center space-x-6 text-sm text-text-secondary">
+                    <a href="javascript:void(0)" class="hover:text-primary transition-colors duration-200">Support</a>
+                    <a href="javascript:void(0)" class="hover:text-primary transition-colors duration-200">Documentation</a>
+                    <a href="javascript:void(0)" class="hover:text-primary transition-colors duration-200">System Status</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Profile dropdown toggle
+        document.getElementById('profileDropdown').addEventListener('click', function() {
+            const profileMenu = document.getElementById('profileMenu');
+            profileMenu.classList.toggle('hidden');
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(event) {
+            const profileDropdown = document.getElementById('profileDropdown');
+            const profileMenu = document.getElementById('profileMenu');
+            
+            if (!profileDropdown.contains(event.target)) {
+                profileMenu.classList.add('hidden');
+            }
+        });
+
+        // Room status tooltips and interactions
+        document.querySelectorAll('[title]').forEach(element => {
+            element.addEventListener('click', function() {
+                const roomInfo = this.getAttribute('title');
+                console.log('Room clicked:', roomInfo);
+                // Here you could open a modal with detailed room information
+            });
+        });
+
+        // Auto-refresh dashboard data (simulated)
+        function refreshDashboard() {
+            const lastUpdated = document.querySelector('[class*="Last updated"]');
+            if (lastUpdated) {
+                const now = new Date();
+                const timeString = now.toLocaleString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric',
+                    hour: 'numeric',
+                    minute: '2-digit',
+                    hour12: true
+                });
+                // Update would happen here in a real application
+                console.log('Dashboard refreshed at:', timeString);
+            }
+        }
+
+        // Refresh every 5 minutes
+        setInterval(refreshDashboard, 300000);
+
+        // Search functionality
+        document.querySelector('input[placeholder="Search students..."]').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('tbody tr');
+            
+            rows.forEach(row => {
+                const studentName = row.querySelector('.text-sm.font-medium').textContent.toLowerCase();
+                const program = row.querySelector('.text-sm.text-text-secondary').textContent.toLowerCase();
+                
+                if (studentName.includes(searchTerm) || program.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is authenticated (mock check)
+            const userType = localStorage.getItem('userType');
+            if (userType !== 'admin') {
+                // Redirect to login if not authenticated
+                window.location.href = 'student_login.html';
+            }
+            
+            console.log('Admin Dashboard initialized');
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>
